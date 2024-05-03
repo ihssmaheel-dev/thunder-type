@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { faker } from "@faker-js/faker"
 
-function App() {
+const words = faker.word.words(10);
 
-  return <div className='text-4xl text-center text-blue-500'>It works</div>
+const App = () => {
+  return <div className='text-4xl text-center text-slate-500'>{words}</div>
 }
 
 export default App
