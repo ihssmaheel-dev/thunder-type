@@ -1,4 +1,6 @@
 import { faker } from "@faker-js/faker"
+import RestartButton from "./components/RestartButton";
+import Results from "./components/Results";
 
 const words = faker.word.words(10);
 
@@ -7,7 +9,7 @@ const GeneratedWords = ({ words }: { words: string }) => {
 }
 
 const CountdownTimer = ({ timeLeft }: { timeLeft: number }) => {
-  return <h2 className="text-primary-400 font-medium">Time: {timeLeft}</h2>;
+  return <h2 className="text-primary-400 font-bold">Time: {timeLeft}</h2>;
 }
 
 const App = () => {
@@ -15,6 +17,16 @@ const App = () => {
     <>
       <CountdownTimer timeLeft={30}/>
       <GeneratedWords words={words}/>
+      <RestartButton 
+        className={"mx-auto mt-10 text-slate-500"} 
+        onRestart={() => null} 
+      />
+      <Results
+        className="mt-10"
+        errors={10}
+        accuracyPercentage={100}
+        total={200}
+      />
     </>
   )
 }
