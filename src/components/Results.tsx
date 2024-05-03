@@ -35,7 +35,7 @@ const Results = ({
 				className="font-bold"
 				transition={{ ...duration, delay: 0.5 }}
 			>
-				Accuracy: {accuracyPercentage}
+				Accuracy: {formatPercentage(accuracyPercentage)}
 			</motion.li>
 			<motion.li
 				initial={initial}
