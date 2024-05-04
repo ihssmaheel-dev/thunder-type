@@ -1,3 +1,5 @@
+import Caret from "./Caret";
+
 const Character = ({ char }: { char: string }) => {
 	return <span className="text-primary-400">{char}</span>
 }
@@ -16,6 +18,7 @@ const UserTypings = ({
 			{typedCharacters.map((char, index) => {
 				return <Character key={`${char}_${index}`} char={char}/>
 			})}
+			<Caret />
 		</div>
 	)
 }
