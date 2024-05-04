@@ -1,9 +1,7 @@
-import { faker } from "@faker-js/faker"
 import RestartButton from "./components/RestartButton";
 import Results from "./components/Results";
 import UserTypings from "./components/UserTypings";
-
-const words = faker.word.words(10);
+import useEngine from "./hooks/useEngine";
 
 const GeneratedWords = ({ words }: { words: string }) => {
   return <div className='text-slate-500'>{words}</div>;
@@ -22,12 +20,15 @@ const WordsContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 const App = () => {
+  const { state, words, timeLeft } = useEngine();
+
+
   return (
     <>
-      <CountdownTimer timeLeft={30}/>
+      <CountdownTimer timeLeft={timeLeft}/>
         <WordsContainer>
           <GeneratedWords words={words}/>
-          <UserTypings className="absolute inset-0" userInput={words} />
+          <UserTypings className="absolute inset-0" userInput={"test"} />
         </WordsContainer>
       <RestartButton 
         className={"mx-auto mt-10 text-slate-500"} 
