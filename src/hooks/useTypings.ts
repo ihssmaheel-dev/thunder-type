@@ -1,4 +1,4 @@
-import { KeyboardEvent, useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 const isKeyboardCodeAllowed = (code: string) => {
 	return (
@@ -30,7 +30,17 @@ const useTypings = (enabled: boolean) => {
 				setCursor(cursor + 1);
 				totalTyped.current += 1;
 		}
+
 	}, [cursor, enabled]);
+
+	const clearTyped = useCallback(() => {
+		setTyped("");
+		setCursor(0);
+	}, []);
+
+	const resetTotalTyped = useCallback(() => {
+		totalTyped.current = 0;
+	}, []);
 
 	//attach the keydown event listener to record keystrokes
 	useEffect(() => {
@@ -41,7 +51,16 @@ const useTypings = (enabled: boolean) => {
 			window.removeEventListener("keydown", keydownHandler);
 		}
 
-	}, [keydownHandler])
+	}, [keydownHandler]);
+
+
+	return {
+		typed,
+		cursor,
+		clearTyped,
+		resetTotalTyped,
+		totalTyped: totalTyped.current,
+	}
 }
 
 export default useTypings
