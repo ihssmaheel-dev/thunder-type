@@ -20,7 +20,7 @@ const WordsContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 const App = () => {
-  const { state, words, timeLeft } = useEngine();
+  const { state, words, timeLeft, typed } = useEngine();
 
 
   return (
@@ -28,7 +28,7 @@ const App = () => {
       <CountdownTimer timeLeft={timeLeft}/>
         <WordsContainer>
           <GeneratedWords words={words}/>
-          <UserTypings className="absolute inset-0" userInput={"test"} />
+          <UserTypings className="absolute inset-0" userInput={typed} />
         </WordsContainer>
       <RestartButton 
         className={"mx-auto mt-10 text-slate-500"} 
