@@ -15,6 +15,7 @@ const useTypings = (enabled: boolean) => {
 	const totalTyped = useRef(0);
 
 	const keydownHandler = useCallback(({ key, code } : KeyboardEvent) => {
+
 		if(!enabled || !isKeyboardCodeAllowed(code)) {
 			return;
 		}
@@ -31,7 +32,7 @@ const useTypings = (enabled: boolean) => {
 				totalTyped.current += 1;
 		}
 
-	}, [cursor, enabled]);
+	}, [enabled]);
 
 	const clearTyped = useCallback(() => {
 		setTyped("");
