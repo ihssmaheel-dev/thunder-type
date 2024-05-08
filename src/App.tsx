@@ -28,7 +28,7 @@ const App = () => {
       <CountdownTimer timeLeft={timeLeft}/>
         <WordsContainer>
           <GeneratedWords words={words}/>
-          <UserTypings className="absolute inset-0" userInput={typed} />
+          <UserTypings className="absolute inset-0" words={words} userInput={typed} />
         </WordsContainer>
       <RestartButton 
         className={"mx-auto mt-10 text-slate-500"} 
