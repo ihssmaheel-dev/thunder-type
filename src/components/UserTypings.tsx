@@ -1,7 +1,18 @@
 import Caret from "./Caret";
 
 const Character = ({ actual, expected }: { actual: string, expected: string }) => {
-	return <span className="text-primary-400">{expected}</span>
+
+	const isCorrect = actual === expected;
+	const isWhitespace = expected === " ";
+
+	return (
+		<span
+			className={cn({
+				"text-red-500": !isCorrect && !isWhitespace,
+				"text-primary-400": isCorrect && !isWhitespace,
+				"bg-red-500/50": !isCorrect && isWhitespace,
+			})}
+		>{expected}</span>)
 }
 
 const UserTypings = ({
