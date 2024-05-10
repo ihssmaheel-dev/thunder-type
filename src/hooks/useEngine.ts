@@ -18,6 +18,7 @@ const useEngine = () => {
     const [errors, setErrors] = useState(0);
 
     const isStarting = state === "start" && cursor > 0;
+    const areWordsFinished = cursor === words.length;
 
     const sumErrors = useCallback(() => {
         const wordsReached = words.substring(0, cursor);
@@ -41,7 +42,22 @@ const useEngine = () => {
         }
     }, [timeLeft, sumErrors])
     
-
+    useEffect(() => {
+        if(areWordsFinished) {
+            console.log("words are finished!");
+            sumErrors();
+            updatedWords();
+            clearTyped();
+        }
+    }, [
+        cursor,
+        words,
+        clearTyped,
+        typed,
+        areWordsFinished,
+        updatedWords,
+        sumErrors
+    ]);
 
     return { state, words, timeLeft, typed };
 };
