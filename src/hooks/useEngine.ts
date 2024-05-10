@@ -31,7 +31,15 @@ const useEngine = () => {
             startCountdown();
         }
 
-    }, [isStarting, startCountdown, cursor])
+    }, [isStarting, startCountdown, cursor]);
+
+    useEffect(() => {
+        if(!timeLeft) {
+            console.log("time is up...");
+            setState("finish");
+            sumErrors();
+        }
+    }, [timeLeft, sumErrors])
     
 
 
