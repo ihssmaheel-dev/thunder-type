@@ -14,3 +14,12 @@ export const countErrors = (actual: string, expected: string) => {
         return errors
     }, 0);
 };
+
+export const calculateAccuracyPercentage = (errors: number, total: number) => {
+    if(total > 0) {
+        const corrects = total - errors;
+        return (corrects / total) * 100;
+    }
+
+    return 0;
+};
