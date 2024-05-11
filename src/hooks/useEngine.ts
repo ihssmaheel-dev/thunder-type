@@ -59,6 +59,16 @@ const useEngine = () => {
         sumErrors
     ]);
 
+    const restart = useCallback(() => {
+        console.log("restrating...");
+        resetCountdown();
+        resetTotalTyped();
+        setState("start");
+        setErrors(0);
+        updatedWords();
+        clearTyped();
+    }, [clearTyped, updatedWords, resetCountdown, resetTotalTyped]);
+
     return { state, words, timeLeft, typed };
 };
 
