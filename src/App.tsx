@@ -2,6 +2,7 @@ import RestartButton from "./components/RestartButton";
 import Results from "./components/Results";
 import UserTypings from "./components/UserTypings";
 import useEngine from "./hooks/useEngine";
+import { calculateAccuracyPercentage } from "./utils/helpers";
 
 const GeneratedWords = ({ words }: { words: string }) => {
   return <div className='text-slate-500'>{words}</div>;
@@ -20,7 +21,7 @@ const WordsContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 const App = () => {
-  const { state, words, timeLeft, typed } = useEngine();
+  const { state, words, timeLeft, typed, errors, totalTyped, restart } = useEngine();
 
 
   return (
@@ -36,9 +37,9 @@ const App = () => {
       />
       <Results
         className="mt-10"
-        errors={10}
-        accuracyPercentage={100}
-        total={200}
+        errors={errors}
+        accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
+        total={totalTyped}
       />
     </>
   )
