@@ -11,7 +11,7 @@ const COUNTDOWN_SECONDS = 30;
 
 const useEngine = () => {
     const [state, setState] = useState<State>("start");
-    const { words, updatedWords } = useWords(NUMBER_OF_WORDS);
+    const { words, updateWords } = useWords(NUMBER_OF_WORDS);
     const { timeLeft, startCountdown, resetCountdown } = useCountdownTimer(COUNTDOWN_SECONDS);
     const { typed, cursor, clearTyped, resetTotalTyped, totalTyped } = useTypings(state !== 'finish');
 
@@ -46,7 +46,7 @@ const useEngine = () => {
         if(areWordsFinished) {
             console.log("words are finished!");
             sumErrors();
-            updatedWords();
+            updateWords();
             clearTyped();
         }
     }, [
@@ -55,7 +55,7 @@ const useEngine = () => {
         clearTyped,
         typed,
         areWordsFinished,
-        updatedWords,
+        updateWords,
         sumErrors
     ]);
 
@@ -65,9 +65,9 @@ const useEngine = () => {
         resetTotalTyped();
         setState("start");
         setErrors(0);
-        updatedWords();
+        updateWords();
         clearTyped();
-    }, [clearTyped, updatedWords, resetCountdown, resetTotalTyped]);
+    }, [clearTyped, updateWords, resetCountdown, resetTotalTyped]);
 
     return { state, words, timeLeft, typed };
 };
