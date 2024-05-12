@@ -16,7 +16,7 @@ const useCountdownTimer = (seconds: number) => {
 		console.log("resetting countdown...");
 
 		if(intervalRef.current) {
-			clearInterval(intervalRef.current);
+			clearInterval(intervalRef.current as unknown as number);
 		}
 
 		setTimeLeft(seconds);
@@ -27,7 +27,7 @@ const useCountdownTimer = (seconds: number) => {
 		if(!timeLeft && intervalRef.current) {
 			console.log("clearing timer...");
 
-			clearInterval(intervalRef.current);
+			clearInterval(intervalRef.current as unknown as number);
 		}
 	}, [timeLeft, intervalRef])
 
