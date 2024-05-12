@@ -33,7 +33,7 @@ const App = () => {
         </WordsContainer>
       <RestartButton 
         className={"mx-auto mt-10 text-slate-500"} 
-        onRestart={() => null} 
+        onRestart={restart} 
       />
       <Results
         className="mt-10"
