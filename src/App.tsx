@@ -36,6 +36,7 @@ const App = () => {
         onRestart={restart} 
       />
       <Results
+        state={state}
         className="mt-10"
         errors={errors}
         accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
