@@ -22,9 +22,8 @@ const useEngine = () => {
     const areWordsFinished = cursor === words.length;
 
     const sumErrors = useCallback(() => {
-        const wordsReached = words.substring(0, cursor);
-        setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached))
-
+        const wordsReached = words.substring(0, Math.min(cursor, words.length));
+        setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
     }, [typed, words, cursor]);
 
     useEffect(() => {
@@ -42,12 +41,12 @@ const useEngine = () => {
     }, [isStarting, startCountdown, cursor]);
 
     useEffect(() => {
-        if(!timeLeft) {
+        if(!timeLeft && state === "run") {
             console.log("time is up...");
             setState("finish");
             sumErrors();
         }
-    }, [timeLeft, sumErrors])
+    }, [timeLeft, state, sumErrors])
     
     useEffect(() => {
         if(areWordsFinished) {
@@ -56,15 +55,7 @@ const useEngine = () => {
             updateWords();
             clearTyped();
         }
-    }, [
-        cursor,
-        words,
-        clearTyped,
-        typed,
-        areWordsFinished,
-        updateWords,
-        sumErrors
-    ]);
+    }, [clearTyped, areWordsFinished, updateWords, sumErrors]);
 
     const restart = useCallback(() => {
         console.log("restrating...");
