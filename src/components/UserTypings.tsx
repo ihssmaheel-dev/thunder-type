@@ -1,3 +1,4 @@
+import cn from "classnames";
 import Caret from "./Caret";
 
 const Character = ({ actual, expected }: { actual: string, expected: string }) => {
