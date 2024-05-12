@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useWords from "./useWords";
 import useCountdownTimer from "./useCountdownTimer";
 import useTypings from "./useTypings";
-import { countErrors } from "../utils/helpers";
+import { calculateWpm, countErrors } from "../utils/helpers";
 
 export type State = "start" | "run" | "finish";
 
@@ -14,6 +14,7 @@ const useEngine = () => {
     const { words, updateWords } = useWords(NUMBER_OF_WORDS);
     const { timeLeft, startCountdown, resetCountdown } = useCountdownTimer(COUNTDOWN_SECONDS);
     const { typed, cursor, clearTyped, resetTotalTyped, totalTyped } = useTypings(state !== 'finish');
+    const [wpm, setWpm] = useState(0);
 
     const [errors, setErrors] = useState(0);
 
@@ -25,6 +26,12 @@ const useEngine = () => {
         setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached))
 
     }, [typed, words, cursor]);
+
+    useEffect(() => {
+        if(state === "finish" && totalTyped > 0) {
+            setWpm(calculateWpm(totalTyped, timeLeft, COUNTDOWN_SECONDS));
+        }
+    }, [state, totalTyped, timeLeft]);
 
     useEffect(() => {
         if(isStarting) {
@@ -69,7 +76,7 @@ const useEngine = () => {
         clearTyped();
     }, [clearTyped, updateWords, resetCountdown, resetTotalTyped]);
 
-    return { state, words, timeLeft, typed, errors, totalTyped, restart };
+    return { state, words, timeLeft, typed, errors, totalTyped, wpm, restart };
 };
 
 export default useEngine;

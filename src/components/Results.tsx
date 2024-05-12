@@ -4,12 +4,14 @@ import { State } from "../hooks/useEngine";
 
 const Results = ({
 	state,
+	wpm,
 	errors,
 	accuracyPercentage,
 	total,
 	className,
 }: {
 	state: State,
+	wpm: number,
 	errors: number,
 	accuracyPercentage: number,
 	total: number,
@@ -47,8 +49,16 @@ const Results = ({
 			<motion.li
 				initial={initial}
 				animate={animate}
-				className="text-red-500 font-bold"
+				className="font-bold"
 				transition={{ ...duration, delay: 1 }}
+			>
+				WPM: {wpm}
+			</motion.li>
+			<motion.li
+				initial={initial}
+				animate={animate}
+				className="text-red-500 font-bold"
+				transition={{ ...duration, delay: 1.5 }}
 			>
 				Errors: {errors}
 			</motion.li>
@@ -56,7 +66,7 @@ const Results = ({
 				initial={initial}
 				animate={animate}
 				className="font-bold"
-				transition={{ ...duration, delay: 1.5 }}
+				transition={{ ...duration, delay: 2 }}
 			>
 				Typed: {total}
 			</motion.li>

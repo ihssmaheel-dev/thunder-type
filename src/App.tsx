@@ -21,7 +21,7 @@ const WordsContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 const App = () => {
-  const { state, words, timeLeft, typed, errors, totalTyped, restart } = useEngine();
+  const { state, words, timeLeft, typed, errors, totalTyped, wpm, restart } = useEngine();
 
 
   return (
@@ -37,6 +37,7 @@ const App = () => {
       />
       <Results
         state={state}
+        wpm={wpm}
         className="mt-10"
         errors={errors}
         accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
